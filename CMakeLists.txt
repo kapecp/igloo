@@ -32,3 +32,27 @@ if(BUILD_TESTS)
   add_test(igloo-tests igloo-tests)
   add_test(snowhouse-tests snowhouse-tests)
 endif()
+
+# Install config
+set(CONF_DEST lib/cmake/Igloo)
+set(INCL_DEST include)
+set(LIB_DEST lib)
+
+add_library(igloo INTERFACE)
+target_include_directories(
+    igloo INTERFACE "$<INSTALL_INTERFACE:${INCL_DEST}>"
+)
+
+include(CMakePackageConfigHelpers)
+set(igloo_config "${CMAKE_CURRENT_BINARY_DIR}/IglooConfig.cmake")
+configure_package_config_file(
+    "IglooConfig.cmake.in"
+    "${igloo_config}"
+    INSTALL_DESTINATION ${CONF_DEST}
+    PATH_VARS CONF_DEST
+)
+
+install(TARGETS igloo DESTINATION ${LIB_DEST} EXPORT IglooTargets)
+install(EXPORT IglooTargets DESTINATION ${CONF_DEST})
+install(DIRECTORY igloo DESTINATION ${INCL_DEST} FILES_MATCHING PATTERN "*.h")
+install(FILES ${igloo_config} DESTINATION ${CONF_DEST})

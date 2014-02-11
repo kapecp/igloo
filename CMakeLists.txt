@@ -2,8 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 
 project(igloo)
 
-set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
-include(cotire)
+include(cmake/cotire.cmake)
 
 include_directories("${PROJECT_SOURCE_DIR}")
 

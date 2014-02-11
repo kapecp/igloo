@@ -4,7 +4,7 @@ project(igloo)
 
 include(cmake/cotire.cmake)
 
-include_directories("${PROJECT_SOURCE_DIR}")
+include_directories("./")
 
 if (MSVC)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4 /MP ")

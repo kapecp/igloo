@@ -7,8 +7,6 @@ include(cotire)
 
 include_directories("${PROJECT_SOURCE_DIR}")
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ./bin)
-
 if (MSVC)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4 /MP ")
 else()
@@ -29,12 +27,6 @@ set_target_properties(snowhouse-tests PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "
 set_target_properties(snowhouse-tests PROPERTIES COTIRE_ADD_UNIT_BUILD FALSE)
 cotire(snowhouse-tests)
 
-add_custom_command(TARGET igloo-tests
-                   POST_BUILD
-                   COMMAND igloo-tests
-                   WORKING_DIRECTORY ./bin)
-
-add_custom_command(TARGET snowhouse-tests
-                   POST_BUILD
-                   COMMAND snowhouse-tests
-                   WORKING_DIRECTORY ./bin)
+enable_testing()
+add_test(igloo-tests igloo-tests)
+add_test(snowhouse-tests snowhouse-tests)

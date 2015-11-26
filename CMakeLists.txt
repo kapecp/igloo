@@ -4,7 +4,7 @@ project(igloo)
 
 
 option(BUILD_TESTS "Build tests" OFF)
-set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/cotire/CMake")
+set (CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/cotire/CMake")
 include(cotire)
 
 include_directories("${PROJECT_SOURCE_DIR}")
@@ -13,7 +13,7 @@ if (MSVC)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4 /MP ")
 else()
   # Assume GCC-style arguments
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wfatal-errors -Wall -W -Werror -Wfloat-equal -Wundef -Wendif-labels -Wshadow -pedantic-errors")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fexceptions -Wfatal-errors -Wall -W -Werror -Wfloat-equal -Wundef -Wendif-labels -Wshadow -pedantic-errors")
 endif()
 
 if(BUILD_TESTS)
